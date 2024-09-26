@@ -101,19 +101,29 @@ public class HttpConnectionWorkerThread extends Thread {
 
     private HttpResponse handleRequest(HttpRequest req) {
 
-        switch (req.getMethod()) {
-            case GET:
-                LOGGER.info(" * GET Request");
-                return handleGetRequest(req, true);
-            case HEAD:
-                LOGGER.info(" * HEAD Request");
-                return handleGetRequest(req, false);
-            default:
-                return new HttpResponse.Builder()
-                        .httpVersion(req.getCompatibleVersion().LITERAL)
-                        .statusCode(HttpStatusCode.SERVER_ERROR_501_NOT_IMPLEMENTED)
-                        .build();
+        HttpMethod method = req.getMethod();
+
+        if(method == null) {
+            return new HttpResponse.Builder()
+                    .httpVersion(req.getCompatibleVersion().LITERAL)
+                    .statusCode(HttpStatusCode.SERVER_ERROR_501_NOT_IMPLEMENTED)
+                    .build();
         }
+
+        return switch (req.getMethod()) {
+            case GET -> {
+                LOGGER.info(" * GET Request");
+                yield handleGetRequest(req, true);
+            }
+            case HEAD -> {
+                LOGGER.info(" * HEAD Request");
+                yield handleGetRequest(req, false);
+            }
+            default -> new HttpResponse.Builder()
+                    .httpVersion(req.getCompatibleVersion().LITERAL)
+                    .statusCode(HttpStatusCode.SERVER_ERROR_501_NOT_IMPLEMENTED)
+                    .build();
+        };
     }
 
     private HttpResponse handleGetRequest(HttpRequest req, boolean setMessageBody) {
