@@ -1,9 +1,12 @@
 # HTTP Server in Java from scratch
-1) Read Config Files
-2) Open a Socket to listen at a Port
-3) Read Request Headers and Messages(Body)
-4) Open and read the files from the File-system
-5) Write and send back the Response Messages
+Creating a simple HTTP server in Java can be a great way to understand the basics of how servers work, including handling client requests, parsing HTTP headers, and sending responses. This article will guide you step-by-step through building an HTTP server that:
+1.	Reads configuration files for settings like the port.
+2.	Opens a socket to listen for incoming requests.
+3.	Parses HTTP request headers and messages.
+4.	Reads files from the file system based on the request.
+5.	Sends HTTP response messages back to the client.
+# Image 
+[![](https://github.com/ATLAS-B28/Jakarta-Http/blob/main/Web_site_success.png)]
 
 ## HTTP-Message 
 = start-line
@@ -60,5 +63,5 @@ tchar = "!" / "#" / "$" / "%" / "&" / "'" / "*"
 
 
 ----------------------------------
-OG YouTube PlayList - https://www.youtube.com/playlist?list=PLAuGQNR28pW56GigraPdiI0oKwcs8gglW
+ #### OG YouTube PlayList - https://www.youtube.com/playlist?list=PLAuGQNR28pW56GigraPdiI0oKwcs8gglW
 -----------------------------------
